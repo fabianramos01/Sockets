@@ -5,14 +5,19 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
+
+import persistence.FileManager;
 
 public class Server {
 
 	private ServerSocket serverSocket;
+	private ArrayList<String> words;
 	
 	public Server() throws IOException {
 		serverSocket = new ServerSocket(2000);
 		System.out.println("Server create at port 2000");
+		words = FileManager.loadWords();
 		waitForNewConnection();
 	}
 	
@@ -29,9 +34,8 @@ public class Server {
 	}
 	
 	private void sendWords(int n, DataOutputStream output) throws IOException {
-		String[] words = {"hello", "good", "pool", "do", "come"};
 		for (int i = 0; i < n; i++) {
-			output.writeUTF(words[i]);
+			output.writeUTF(words.get(i));
 		}
 		output.close();
 	}

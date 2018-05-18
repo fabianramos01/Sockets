@@ -19,15 +19,19 @@ public class Client {
 			System.out.println("enviando datos...");
 			int n = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad de palabras"));
 			output.writeInt(n);
-			DataInputStream input = new DataInputStream(socket.getInputStream());
-			for (int i = 0; i < n; i++) {
-				System.out.println(input.readUTF());
-			}
-			input.close();
+			readWords(n);
 			output.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private void readWords(int n) throws IOException {
+		DataInputStream input = new DataInputStream(socket.getInputStream());
+		for (int i = 0; i < n; i++) {
+			System.out.println(input.readUTF());
+		}
+		input.close();
 	}
 	
 	
