@@ -4,8 +4,11 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
+
+import view.FrameHome;
 
 public class Client {
 
@@ -28,10 +31,12 @@ public class Client {
 	
 	private void readWords(int n) throws IOException {
 		DataInputStream input = new DataInputStream(socket.getInputStream());
+		ArrayList<String> list = new ArrayList<>();
 		for (int i = 0; i < n; i++) {
-			System.out.println(input.readUTF());
+			list.add(input.readUTF());
 		}
 		input.close();
+		new FrameHome(list);
 	}
 	
 	
