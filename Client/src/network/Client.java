@@ -17,7 +17,7 @@ public class Client {
 	public Client() {
 		try {
 			System.out.println("Conexion iniciada");
-			socket = new Socket("localhost", 2000);
+			socket = new Socket("10.4.72.112", 2000);
 			DataOutputStream output = new DataOutputStream(socket.getOutputStream());
 			System.out.println("enviando datos...");
 			int n = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad de palabras"));
