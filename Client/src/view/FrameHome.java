@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.Font;
 import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
@@ -8,18 +7,18 @@ import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 
+import controller.ConstantList;
+
 public class FrameHome extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	public static final Font AGENCY_FB = new Font("Agency FB", Font.BOLD, 30);
 	private DefaultListModel<String> listModel;
 	private JList<String> list;
 	
-	public FrameHome(ArrayList<String> words) {
+	public FrameHome() {
 		setTitle("Client");
 		setSize(400, 700);
 		list = new JList<>();
-		loadWords(words);
 		add(new JScrollPane(list));
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
@@ -32,7 +31,7 @@ public class FrameHome extends JFrame {
 		for (String string : words) {
 			listModel.addElement(string);
 		}
-		list.setFont(AGENCY_FB);
+		list.setFont(ConstantList.AGENCY_FB);
 		list.setModel(listModel);
 		revalidate();
 	}

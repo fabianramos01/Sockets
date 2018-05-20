@@ -8,10 +8,6 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
 
-import javax.swing.JOptionPane;
-
-import view.FrameHome;
-
 public class Client {
 
 	private Socket socket;
@@ -24,8 +20,6 @@ public class Client {
 			socket = new Socket(ip, 2000);
 			output = new DataOutputStream(socket.getOutputStream());
 			input = new DataInputStream(socket.getInputStream());
-			int n = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad de palabras"));
-			getWords(n);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -39,13 +33,13 @@ public class Client {
 		if (input.readUTF().equals(Request.GET_WORDS.toString())) {
 			for (int i = 0; i < n; i++) {
 				list.add(input.readUTF());
-//				new FrameHome(list);
 			}
 		}
 		return list;
 	}
 
 	public String getServerHour() throws IOException {
+		System.out.println("enviando datos...");
 		output.writeUTF(Request.GET_HOUR.toString());
 		String hour = "";
 		if (input.readUTF().equals(Request.GET_HOUR.toString())) {
@@ -55,6 +49,7 @@ public class Client {
 	}
 	
 	public File getFile() throws IOException {
+		System.out.println("enviando datos...");
 		output.writeUTF(Request.GET_FILE.toString());
 		File file = null;
 		if (input.readUTF().equals(Request.GET_FILE.toString())) {
