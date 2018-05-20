@@ -25,11 +25,22 @@ public class Server {
 		while (true) {
 			Socket socket = serverSocket.accept();
 			System.out.println("New connection!");
-			DataInputStream input = new DataInputStream(socket.getInputStream());
+			request(new DataInputStream(socket.getInputStream()), new DataOutputStream(socket.getOutputStream()));
+		}
+	}
+	
+	private void request(DataInputStream input, DataOutputStream output) throws IOException {
+		switch (Request.valueOf(input.readUTF())) {
+		case GET_HOUR:
+			
+			break;
+		case GET_FILE:
+			break;
+		case GET_WORDS:
 			int n = input.readInt();
 			System.out.println(n);
-			sendWords(n, new DataOutputStream(socket.getOutputStream()));
-			input.close();
+			sendWords(n, output);
+			break;
 		}
 	}
 	

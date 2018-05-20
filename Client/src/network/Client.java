@@ -66,8 +66,4 @@ public class Client {
 		fOutputStream.write(array);
 		fOutputStream.close();
 	}
-
-	public static void main(String[] args) {
-		new Client("10.4.72.112");
-	}
 }

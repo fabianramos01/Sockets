@@ -1,5 +1,4 @@
-/view/
-/network/
-/model/
 /controller/
-/data/
+/view/
+/runner/
+/network/
