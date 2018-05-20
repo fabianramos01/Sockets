@@ -46,7 +46,6 @@ public class PanelWords extends JPanel {
 	}
 	
 	public int getWordNumber() {
-		System.out.println(spinner.getValue().toString());
 		return Integer.parseInt(spinner.getValue().toString());
 	}
 }

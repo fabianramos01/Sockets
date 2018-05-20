@@ -1,7 +1,5 @@
 package network;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -25,30 +23,12 @@ public class Server {
 		while (true) {
 			Socket socket = serverSocket.accept();
 			System.out.println("New connection!");
-			request(new DataInputStream(socket.getInputStream()), new DataOutputStream(socket.getOutputStream()));
+			new Connection(socket, this);
 		}
 	}
 	
-	private void request(DataInputStream input, DataOutputStream output) throws IOException {
-		switch (Request.valueOf(input.readUTF())) {
-		case GET_HOUR:
-			
-			break;
-		case GET_FILE:
-			break;
-		case GET_WORDS:
-			int n = input.readInt();
-			System.out.println(n);
-			sendWords(n, output);
-			break;
-		}
-	}
-	
-	private void sendWords(int n, DataOutputStream output) throws IOException {
-		for (int i = 0; i < n; i++) {
-			output.writeUTF(words.get(i));
-		}
-		output.close();
+	public ArrayList<String> getWords() {
+		return words;
 	}
 	
 	public static void main(String[] args) {
