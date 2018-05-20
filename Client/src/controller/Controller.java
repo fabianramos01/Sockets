@@ -15,7 +15,7 @@ public class Controller implements ActionListener{
 	
 	public Controller() {
 		connect();
-		frameHome = new FrameHome();
+		frameHome = new FrameHome(this);
 	}
 	
 	private void connect() {

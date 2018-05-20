@@ -1,25 +1,20 @@
 package view;
 
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
-import javax.swing.JList;
-import javax.swing.JScrollPane;
-
-import controller.ConstantList;
 
 public class FrameHome extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private DefaultListModel<String> listModel;
-	private JList<String> list;
+	private PanelWords panelWords;
 	
-	public FrameHome() {
+	public FrameHome(ActionListener listener) {
 		setTitle("Client");
 		setSize(400, 700);
-		list = new JList<>();
-		add(new JScrollPane(list));
+		panelWords = new PanelWords(listener);
+		add(panelWords);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setResizable(false);
@@ -27,12 +22,7 @@ public class FrameHome extends JFrame {
 	}
 	
 	public void loadWords(ArrayList<String> words) {
-		listModel = new DefaultListModel<>();
-		for (String string : words) {
-			listModel.addElement(string);
-		}
-		list.setFont(ConstantList.AGENCY_FB);
-		list.setModel(listModel);
+		panelWords.loadWords(words);
 		revalidate();
 	}
 }
