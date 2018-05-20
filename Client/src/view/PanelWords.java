@@ -1,10 +1,12 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -24,6 +26,7 @@ public class PanelWords extends JPanel {
 
 	public PanelWords(ActionListener listener) {
 		setLayout(new BorderLayout());
+		setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		wordList = new JList<>();
 		JPanel panel = new JPanel(new GridLayout(1, 2));
 		spinner = new JSpinner(new SpinnerNumberModel(0, 0, 500, 1));

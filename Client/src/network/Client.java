@@ -53,9 +53,9 @@ public class Client {
 		output.writeUTF(Request.GET_FILE.toString());
 		File file = null;
 		if (input.readUTF().equals(Request.GET_FILE.toString())) {
+			file = new File(input.readUTF());
 			byte[] fileArray = new byte[input.readInt()];
 			input.readFully(fileArray);
-			file = new File(input.readUTF());
 			writeFile(file, fileArray);
 		}
 		return file;

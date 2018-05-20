@@ -5,8 +5,8 @@ import javax.swing.ImageIcon;
 public enum Command {
 
 	COMMAND_WORDS("COMMAND_WORDS", "Obtener palabras" , "/data/words.png"),
-	COMMAND_FILE("COMMAND_FILE", "Obtener palabras" , "/data/words.png"),
-	COMMAND_CLOCK("COMMAND_CLOCK", "Obtener palabras" , "/data/words.png");
+	COMMAND_FILE("COMMAND_FILE", "Obtener palabras" , "/data/file.png"),
+	COMMAND_CLOCK("COMMAND_CLOCK", "Obtener palabras" , "/data/clock.png");
 	
 	private String command;
 	private String title;

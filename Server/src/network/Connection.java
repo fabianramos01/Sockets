@@ -2,6 +2,8 @@ package network;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.Calendar;
@@ -39,7 +41,23 @@ public class Connection extends MyThread {
 		output.writeUTF(Request.GET_HOUR.toString());
 		Calendar calendar = Calendar.getInstance();
 		output.writeUTF(calendar.get(Calendar.HOUR) + ":" + calendar.get(Calendar.MINUTE) + ":"
-				+ calendar.get(Calendar.SECOND) + ":");
+				+ calendar.get(Calendar.SECOND));
+	}
+
+	private void sendFile() throws IOException {
+		output.writeUTF(Request.GET_FILE.toString());
+		File file = new File(ConstantList.SEND_FILE);
+		byte[] array = new byte[(int) file.length()];
+		readFile(file, array);
+		output.writeUTF(file.getName());
+		output.writeInt(array.length);
+		output.write(array);
+	}
+
+	private void readFile(File file, byte[] array) throws IOException {
+		FileInputStream inputStream = new FileInputStream(file);
+		inputStream.read(array);
+		inputStream.close();
 	}
 
 	@Override
@@ -50,6 +68,7 @@ public class Connection extends MyThread {
 				sendHour();
 				break;
 			case GET_FILE:
+				sendFile();
 				break;
 			case GET_WORDS:
 				sendWords();
@@ -57,6 +76,7 @@ public class Connection extends MyThread {
 			}
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
+			stop();
 		}
 	}
 }
