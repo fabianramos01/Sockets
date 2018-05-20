@@ -21,7 +21,7 @@ public class Client {
 			output = new DataOutputStream(socket.getOutputStream());
 			input = new DataInputStream(socket.getInputStream());
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 	}
 

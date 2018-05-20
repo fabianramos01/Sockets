@@ -63,6 +63,9 @@ public class Controller implements ActionListener {
 		case COMMAND_WORDS:
 			getWords();
 			break;
+		case CHANGE_IP:
+			connect();
+			break;
 		}
 	}
 }

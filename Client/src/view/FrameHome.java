@@ -25,15 +25,20 @@ public class FrameHome extends JFrame {
 		setTitle(ConstantList.APP_NAME);
 		setLayout(new BorderLayout());
 		setIconImage(new ImageIcon(getClass().getResource(ConstantList.APP_ICON)).getImage());
-		setSize(400, 700);
-		addPanelHour(listener);
-		panelWords = new PanelWords(listener);
-		add(panelWords, BorderLayout.CENTER);
-		addPanelFile(listener);
+		setSize(ConstantList.WIDTH_FRAME, ConstantList.HEIGHT_FRAME);
+		init(listener);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setResizable(false);
 		setVisible(true);
+	}
+	
+	private void init(ActionListener listener) {
+		setJMenuBar(new MenuBarUser(listener));
+		addPanelHour(listener);
+		panelWords = new PanelWords(listener);
+		add(panelWords, BorderLayout.CENTER);
+		addPanelFile(listener);
 	}
 
 	private void addPanelHour(ActionListener listener) {
