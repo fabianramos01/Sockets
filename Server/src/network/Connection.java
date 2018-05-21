@@ -32,8 +32,10 @@ public class Connection extends MyThread {
 		int n = input.readInt();
 		System.out.println(n);
 		output.writeUTF(Request.GET_WORDS.toString());
-		for (int i = 0; i < n; i++) {
-			output.writeUTF(server.getWords().get(i));
+		if (n <= server.getWords().size()) {
+			for (int i = 0; i < n; i++) {
+				output.writeUTF(server.getWords().get(i));
+			}
 		}
 	}
 

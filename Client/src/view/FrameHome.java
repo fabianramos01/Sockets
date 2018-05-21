@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -42,10 +43,12 @@ public class FrameHome extends JFrame {
 	}
 
 	private void addPanelHour(ActionListener listener) {
-		JPanel panel = new JPanel(new GridLayout(1, 3));
-		panel.add(UtilityList.createJLabel(ConstantList.SERVER_HOUR, ConstantList.AGENCY_FB, Color.BLACK));
-		panel.add(UtilityList.createJButton(Command.COMMAND_CLOCK.getCommand(), Command.COMMAND_CLOCK.getTitle(),
-				Command.COMMAND_CLOCK.getImg(), listener));
+		JPanel panel = new JPanel(new GridLayout(1, 2));
+		JButton button = UtilityList.createJButton(Command.COMMAND_CLOCK.getCommand(), Command.COMMAND_CLOCK.getTitle(),
+				Command.COMMAND_CLOCK.getImg(), listener);
+		button.setText(Command.COMMAND_CLOCK.getTitle());
+		button.setFont(ConstantList.AGENCY_FB);
+		panel.add(button);
 		labelHour = UtilityList.createJLabel("", ConstantList.AGENCY_FB, Color.BLACK);
 		labelHour.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		panel.add(labelHour);
