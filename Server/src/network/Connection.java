@@ -30,7 +30,6 @@ public class Connection extends MyThread {
 
 	private void sendWords() throws IOException {
 		int n = input.readInt();
-		System.out.println(n);
 		output.writeUTF(Request.GET_WORDS.toString());
 		if (n <= server.getWords().size()) {
 			for (int i = 0; i < n; i++) {
