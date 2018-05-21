@@ -4,7 +4,6 @@ import java.awt.Font;
 
 public class ConstantList {
 	
-	
 	public static final String APP_NAME = "Client";
 	public static final String APP_ICON = "/data/appIcon.png";
 	public static final int WIDTH_FRAME = 600;

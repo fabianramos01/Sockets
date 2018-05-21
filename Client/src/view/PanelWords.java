@@ -32,8 +32,8 @@ public class PanelWords extends JPanel {
 		spinner = new JSpinner(new SpinnerNumberModel(0, 0, 500, 1));
 		spinner.setFont(ConstantList.AGENCY_FB);
 		panel.add(spinner);
-		panel.add(UtilityList.createJButton(Command.COMMAND_WORDS.getCommand(), Command.COMMAND_WORDS.getTitle(),
-				Command.COMMAND_WORDS.getImg(), listener));
+		panel.add(UtilityList.createJButtonText(Command.COMMAND_WORDS.getCommand(), Command.COMMAND_WORDS.getTitle(),
+				Color.BLACK, Color.WHITE, ConstantList.AGENCY_FB, listener));
 		add(panel, BorderLayout.NORTH);
 		add(new JScrollPane(wordList), BorderLayout.CENTER);
 	}
@@ -47,7 +47,7 @@ public class PanelWords extends JPanel {
 		wordList.setModel(listModel);
 		revalidate();
 	}
-	
+
 	public int getWordNumber() {
 		return Integer.parseInt(spinner.getValue().toString());
 	}

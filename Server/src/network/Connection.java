@@ -40,8 +40,9 @@ public class Connection extends MyThread {
 	private void sendHour() throws IOException {
 		output.writeUTF(Request.GET_HOUR.toString());
 		Calendar calendar = Calendar.getInstance();
+		String am_pm = calendar.get(Calendar.AM_PM) == 1 ? "pm" : "am";
 		output.writeUTF(calendar.get(Calendar.HOUR) + ":" + calendar.get(Calendar.MINUTE) + ":"
-				+ calendar.get(Calendar.SECOND));
+				+ calendar.get(Calendar.SECOND) + " " + am_pm);
 	}
 
 	private void sendFile() throws IOException {
