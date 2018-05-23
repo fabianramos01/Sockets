@@ -5,32 +5,34 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
-import persistence.FileManager;
+import model.MyThread;
 
-public class Server {
+public class Server extends MyThread {
 
+	private static final String SERVER = "Servidor";
+	private static final int SLEEP = 1000;
 	private ServerSocket serverSocket;
-	private ArrayList<String> words;
-	
+	private ArrayList<Connection> connections;
+	private Socket socket;
+
 	public Server() throws IOException {
+		super(SERVER, SLEEP);
 		serverSocket = new ServerSocket(2000);
 		System.out.println("Server create at port 2000");
-		words = FileManager.loadWords();
-		waitForNewConnection();
+		start();
 	}
-	
-	public void waitForNewConnection() throws IOException {
-		while (true) {
-			Socket socket = serverSocket.accept();
+
+	@Override
+	public void execute() {
+		try {
+			socket = serverSocket.accept();
 			System.out.println("New connection!");
-			new Connection(socket, this);
+			connections.add(new Connection(socket));
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
 		}
 	}
-	
-	public ArrayList<String> getWords() {
-		return words;
-	}
-	
+
 	public static void main(String[] args) {
 		try {
 			new Server();

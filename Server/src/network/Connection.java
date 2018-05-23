@@ -6,22 +6,24 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import model.MyThread;
+import persistence.FileManager;
 
 public class Connection extends MyThread {
 
 	private DataInputStream input;
 	private DataOutputStream output;
-	private Server server;
+	private Socket socket;
 
-	public Connection(Socket socket, Server server) {
+	public Connection(Socket socket) {
 		super("", 1000);
-		this.server = server;
+		this.socket = socket;
 		try {
-			input = new DataInputStream(socket.getInputStream());
-			output = new DataOutputStream(socket.getOutputStream());
+			input = new DataInputStream(this.socket.getInputStream());
+			output = new DataOutputStream(this.socket.getOutputStream());
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
@@ -31,9 +33,10 @@ public class Connection extends MyThread {
 	private void sendWords() throws IOException {
 		int n = input.readInt();
 		output.writeUTF(Request.GET_WORDS.toString());
-		if (n <= server.getWords().size()) {
+		ArrayList<String> words = FileManager.loadWords();
+		if (n <= words.size()) {
 			for (int i = 0; i < n; i++) {
-				output.writeUTF(server.getWords().get(i));
+				output.writeUTF(words.get(i));
 			}
 		}
 	}
@@ -61,20 +64,28 @@ public class Connection extends MyThread {
 		inputStream.read(array);
 		inputStream.close();
 	}
+	
+	private void managerRequest(String request) throws IOException {
+		switch (Request.valueOf(request)) {
+		case GET_HOUR:
+			sendHour();
+			break;
+		case GET_FILE:
+			sendFile();
+			break;
+		case GET_WORDS:
+			sendWords();
+			break;
+		}
+	}
 
 	@Override
 	public void execute() {
+		String request;
 		try {
-			switch (Request.valueOf(input.readUTF())) {
-			case GET_HOUR:
-				sendHour();
-				break;
-			case GET_FILE:
-				sendFile();
-				break;
-			case GET_WORDS:
-				sendWords();
-				break;
+			request = input.readUTF();
+			if (request != null) {
+				managerRequest(request);
 			}
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
